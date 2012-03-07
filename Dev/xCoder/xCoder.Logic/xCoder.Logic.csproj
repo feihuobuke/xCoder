@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F2D9C29C-9EEF-450E-8752-CFF23D3B09F7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>xCoder.Logic</RootNamespace>
+    <AssemblyName>xCoder.Logic</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.TextTemplating, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="T4Toolbox, Version=10.10.13.1, Culture=neutral, PublicKeyToken=7e313accbcce84dc, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\T4Toolkit\T4Toolbox.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Builder\AbsBuilder.cs" />
+    <Compile Include="Builder\BuilderParameters.cs" />
+    <Compile Include="Builder\DAOClassBuilder.cs" />
+    <Compile Include="Builder\NHibernateBuilder.cs" />
+    <Compile Include="Data\AbsBase\AbsReader.cs" />
+    <Compile Include="Data\DBBuilder.cs" />
+    <Compile Include="Data\MsSql\MsSqlReader.cs" />
+    <Compile Include="Extension\DBExt.cs" />
+    <Compile Include="Interface\IReader.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Template\Builder.cs" />
+    <Compile Include="Template\Loader.cs" />
+    <Compile Include="Template\TempleteFile.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\xCoder.Bean\xCoder.Bean.csproj">
+      <Project>{E6176D7D-A690-4FC3-8104-BFA741089D7A}</Project>
+      <Name>xCoder.Bean</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="T4Util\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resource\MSSQL.Table.Column.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resource\MSSQL\Columns.sql" />
+    <EmbeddedResource Include="Resource\MSSQL\Tables.sql" />
+    <EmbeddedResource Include="Resource\MSSQL\ForeignKeys.sql" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

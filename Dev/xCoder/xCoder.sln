@@ -1,0 +1,65 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xCoder.Bean", "xCoder.Bean\xCoder.Bean.csproj", "{E6176D7D-A690-4FC3-8104-BFA741089D7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xCoder.Logic", "xCoder.Logic\xCoder.Logic.csproj", "{F2D9C29C-9EEF-450E-8752-CFF23D3B09F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xCoder.Test", "xCoder.Test\xCoder.Test.csproj", "{32CAB6D9-324E-42A8-BB14-B6853BE55EDD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xCoder.Comm", "xCoder.Comm\xCoder.Comm.csproj", "{EABF0E26-1BFC-467E-8C5E-CC705F5094A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xCoder.Parser", "xCoder.Parser\xCoder.Parser.csproj", "{3CAB6FE6-3DBE-4374-8147-6E433F766AE2}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs20
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = xCoder.Bean\\xCoder.Bean.csproj
+		SccProjectName1 = xCoder.Bean
+		SccLocalPath1 = xCoder.Bean
+		SccProjectUniqueName2 = xCoder.Comm\\xCoder.Comm.csproj
+		SccProjectName2 = xCoder.Comm
+		SccLocalPath2 = xCoder.Comm
+		SccProjectUniqueName3 = xCoder.Logic\\xCoder.Logic.csproj
+		SccProjectName3 = xCoder.Logic
+		SccLocalPath3 = xCoder.Logic
+		SccProjectUniqueName4 = xCoder.Parser\\xCoder.Parser.csproj
+		SccProjectName4 = xCoder.Parser
+		SccLocalPath4 = xCoder.Parser
+		SccProjectUniqueName5 = xCoder.Test\\xCoder.Test.csproj
+		SccProjectName5 = xCoder.Test
+		SccLocalPath5 = xCoder.Test
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E6176D7D-A690-4FC3-8104-BFA741089D7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6176D7D-A690-4FC3-8104-BFA741089D7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6176D7D-A690-4FC3-8104-BFA741089D7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6176D7D-A690-4FC3-8104-BFA741089D7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2D9C29C-9EEF-450E-8752-CFF23D3B09F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2D9C29C-9EEF-450E-8752-CFF23D3B09F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2D9C29C-9EEF-450E-8752-CFF23D3B09F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2D9C29C-9EEF-450E-8752-CFF23D3B09F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32CAB6D9-324E-42A8-BB14-B6853BE55EDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32CAB6D9-324E-42A8-BB14-B6853BE55EDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32CAB6D9-324E-42A8-BB14-B6853BE55EDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32CAB6D9-324E-42A8-BB14-B6853BE55EDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EABF0E26-1BFC-467E-8C5E-CC705F5094A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EABF0E26-1BFC-467E-8C5E-CC705F5094A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EABF0E26-1BFC-467E-8C5E-CC705F5094A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EABF0E26-1BFC-467E-8C5E-CC705F5094A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CAB6FE6-3DBE-4374-8147-6E433F766AE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CAB6FE6-3DBE-4374-8147-6E433F766AE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CAB6FE6-3DBE-4374-8147-6E433F766AE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CAB6FE6-3DBE-4374-8147-6E433F766AE2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
