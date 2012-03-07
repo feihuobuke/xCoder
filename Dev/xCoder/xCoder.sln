@@ -11,6 +11,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xCoder.Comm", "xCoder.Comm\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xCoder.Parser", "xCoder.Parser\xCoder.Parser.csproj", "{3CAB6FE6-3DBE-4374-8147-6E433F766AE2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{94C3B351-0A1E-4148-88F5-A9A8A7B4BE7D}"
+	ProjectSection(SolutionItems) = preProject
+		lib\NUnit\nunit.framework.dll = lib\NUnit\nunit.framework.dll
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
 		SccNumberOfProjects = 6
