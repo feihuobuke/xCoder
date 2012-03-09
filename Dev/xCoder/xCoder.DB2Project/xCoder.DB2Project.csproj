@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
@@ -60,7 +61,6 @@
     <Compile Include="Logic\Data\MsSql\MsSqlReader.cs" />
     <Compile Include="Logic\Extension\DBExt.cs" />
     <Compile Include="Logic\Interface\IReader.cs" />
-    <Compile Include="Logic\Template\Builder.cs" />
     <Compile Include="Logic\Template\Loader.cs" />
     <Compile Include="Logic\Template\TempleteFile.cs" />
     <Compile Include="Parser\AbsParser.cs" />
