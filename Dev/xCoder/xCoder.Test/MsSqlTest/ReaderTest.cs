@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web.Script.Serialization;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using xCoder.Bean;
 using xCoder.Logic;
 using System.Web;
@@ -14,10 +14,10 @@ using xCoder.Parser.xCode;
 
 namespace xCoder.Test.MsSqlTest
 {
-    [TestFixture]
+    [TestClass]
     public class ReaderTest
     {
-        [Test]
+        [TestMethod]
         public void Read()
         {
             var builder = new DBBuilder(new DBConnection
@@ -55,7 +55,7 @@ namespace xCoder.Test.MsSqlTest
             }
         }
 
-        [Test]
+        [TestMethod]
         public void Vares()
         {
             //var temp = File.ReadAllText("./testdata/test2.tpl", Encoding.UTF8);
@@ -98,7 +98,7 @@ namespace xCoder.Test.MsSqlTest
 
         }
 
-        [Test]
+        [TestMethod]
         public void Runner()
         {
             //var runner = new StatementRunner("Output=\"<#=Name#>\";");

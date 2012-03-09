@@ -44,16 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbsParser.cs" />
-    <Compile Include="Parser.cs" />
-    <Compile Include="ParserType.cs" />
-    <Compile Include="xCode\ParserOptions.cs" />
-    <Compile Include="xCode\StatementParser.cs" />
-    <Compile Include="xCode\StatementRunner.cs" />
-    <Compile Include="xCode\VariableTagParser.cs" />
-    <Compile Include="xCode\ValueCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="xCode\XCoderOptions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

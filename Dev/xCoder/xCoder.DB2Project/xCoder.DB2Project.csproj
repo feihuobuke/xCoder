@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{32CAB6D9-324E-42A8-BB14-B6853BE55EDD}</ProjectGuid>
+    <ProjectGuid>{91F61E76-F90F-4299-ABFC-CF04303F6515}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>xCoder.Test</RootNamespace>
-    <AssemblyName>xCoder.Test</AssemblyName>
+    <RootNamespace>xCoder.DB2Project</RootNamespace>
+    <AssemblyName>xCoder.DB2Project</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -35,40 +35,59 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MsSqlTest\ReaderTest.cs" />
-    <Compile Include="ParserTest\xCoderPaser.cs" />
+    <Compile Include="Bean\Column.cs" />
+    <Compile Include="Bean\DataBase.cs" />
+    <Compile Include="Bean\DBConnection.cs" />
+    <Compile Include="Bean\ForeignKey.cs" />
+    <Compile Include="Bean\Table.cs" />
+    <Compile Include="Bean\Type\DBType.cs" />
+    <Compile Include="Bean\Type\TableType.cs" />
+    <Compile Include="Comm\Util\JsonUtil.cs" />
+    <Compile Include="Logic\Builder\AbsBuilder.cs" />
+    <Compile Include="Logic\Builder\BuilderParameters.cs" />
+    <Compile Include="Logic\Builder\DAOClassBuilder.cs" />
+    <Compile Include="Logic\Builder\NHibernateBuilder.cs" />
+    <Compile Include="Logic\Data\AbsBase\AbsReader.cs" />
+    <Compile Include="Logic\Data\DBBuilder.cs" />
+    <Compile Include="Logic\Data\MsSql\MsSqlReader.cs" />
+    <Compile Include="Logic\Extension\DBExt.cs" />
+    <Compile Include="Logic\Interface\IReader.cs" />
+    <Compile Include="Logic\Template\Builder.cs" />
+    <Compile Include="Logic\Template\Loader.cs" />
+    <Compile Include="Logic\Template\TempleteFile.cs" />
+    <Compile Include="Parser\AbsParser.cs" />
+    <Compile Include="Parser\Parser.cs" />
+    <Compile Include="Parser\ParserType.cs" />
+    <Compile Include="Parser\xCode\ParserOptions.cs" />
+    <Compile Include="Parser\xCode\StatementParser.cs" />
+    <Compile Include="Parser\xCode\StatementRunner.cs" />
+    <Compile Include="Parser\xCode\ValueCollection.cs" />
+    <Compile Include="Parser\xCode\VariableTagParser.cs" />
+    <Compile Include="Parser\xCode\XCoderOptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <None Include="testdata\test2.tpl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Folder Include="Logic\T4Util\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="testdata\test.tpl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="testdata\test1.tpl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <EmbeddedResource Include="Logic\Resource\MSSQL\Columns.sql" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\xCoder.DB2Project\xCoder.DB2Project.csproj">
-      <Project>{91F61E76-F90F-4299-ABFC-CF04303F6515}</Project>
-      <Name>xCoder.DB2Project</Name>
-    </ProjectReference>
+    <EmbeddedResource Include="Logic\Resource\MSSQL\ForeignKeys.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Logic\Resource\MSSQL\Tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Logic\Resource\MSSQL.Table.Column.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
