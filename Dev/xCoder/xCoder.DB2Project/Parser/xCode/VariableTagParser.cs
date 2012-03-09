@@ -1,24 +1,41 @@
-﻿using System.Collections.Generic;
+﻿// ************************************************************************************************
+// *								       
+// *	Copyright (c) 2012, xCoder Project Team All rights reserved.	       
+// *	@xCoder/xCoder.DB2Project/VariableTagParser.cs                                                                   
+// *	Created @ 03/09/2012 6:29 PM							       
+// *	By Hermanxwong@Codeplex					         
+// *								         
+// *	This Project follow BSD License					        
+// ************************************************************************************************
+
+using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace xCoder.Parser.xCode
+namespace xCoder.DB2Project.Parser.xCode
 {
     internal class VariableTagParser : AbsParser
     {
         private const string ItemRegxFormat = "(.*)(={0})(.*)";
 
         public VariableTagParser(XCoderOptions options)
-            : base(options, "<#(.[^#>]*[^<#]{0})#>")//@"\<\#(.[^(<#)]*[^(#>)])\#\>")
+            : base(options, "<#(.[^#>]*[^<#]{0})#>") //@"\<\#(.[^(<#)]*[^(#>)])\#\>")
         {
         }
-
 
 
         public string Build(object parameter)
         {
             var data = parameter.Convert();
+            foreach (string variable in Options.VariableCollection)
+            {
+                if (string.IsNullOrEmpty(data[variable]))
+                {
+                    data.Add(variable, Options.VariableCollection[variable]);
+                }
+            }
             Match[] results = Parse();
             string temp = TemplateContent;
 
@@ -45,7 +62,7 @@ namespace xCoder.Parser.xCode
             return temp;
         }
 
-        public void Render(ValueCollection data, FileInfo file, bool append)
+        public void Render(NameValueCollection data, FileInfo file, bool append)
         {
             if (file.Exists && !append)
             {

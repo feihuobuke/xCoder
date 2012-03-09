@@ -1,18 +1,28 @@
-﻿using System.Collections.Generic;
+﻿// ************************************************************************************************
+// *								       
+// *	Copyright (c) 2012, xCoder Project Team All rights reserved.	       
+// *	@xCoder/xCoder.DB2Project/AbsParser.cs                                                                   
+// *	Created @ 03/09/2012 6:29 PM							       
+// *	By Hermanxwong@Codeplex					         
+// *								         
+// *	This Project follow BSD License					        
+// ************************************************************************************************
+
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using xCoder.Parser.xCode;
+using xCoder.DB2Project.Parser.xCode;
 
-namespace xCoder.Parser
+namespace xCoder.DB2Project.Parser
 {
     internal abstract class AbsParser
     {
-        public XCoderOptions Options { get; set; }
-        internal string TagRegx;
+        protected static readonly RegexOptions RegxOptions = RegexOptions.Singleline | RegexOptions.Multiline |
+                                                             RegexOptions.IgnoreCase | RegexOptions.CultureInvariant;
+
         internal Regex BaseRegex;
-        protected string TemplateContent { get; set; }
-        protected static readonly RegexOptions RegxOptions = RegexOptions.Singleline | RegexOptions.Multiline | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant;
+        internal string TagRegx;
 
         protected AbsParser(XCoderOptions options, string tagRegx)
         {
@@ -23,15 +33,22 @@ namespace xCoder.Parser
             {
                 throw new InvalidDataException("XCoderOptions: Code File To be parsed can not be found");
             }
-            TemplateContent = Options.Code != null ? Options.Code.ReadToEnd() : File.ReadAllText(options.SourceCode.FullName);
+            TemplateContent = Options.Code != null
+                                  ? Options.Code.ToString()
+                                  : File.ReadAllText(options.SourceCode.FullName);
             Results = new List<string>();
         }
+
+        public XCoderOptions Options { get; set; }
+        protected string TemplateContent { get; set; }
+
+        public List<string> Results { get; protected set; }
+
         internal virtual Match[] Parse()
         {
             var res = BaseRegex.Matches(TemplateContent).OfType<Match>().ToArray();
             Results.AddRange(res.Select(t => t.Value));
             return res;
         }
-        public List<string> Results { get; protected set; }
     }
 }

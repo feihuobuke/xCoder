@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builder\NHDaoBuilderTest.cs" />
     <Compile Include="MsSqlTest\ReaderTest.cs" />
     <Compile Include="ParserTest\xCoderPaser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

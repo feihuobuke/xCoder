@@ -1,28 +1,34 @@
-﻿using System.Collections.Generic;
+﻿// ************************************************************************************************
+// *								       
+// *	Copyright (c) 2012, xCoder Project Team All rights reserved.	       
+// *	@xCoder/xCoder.DB2Project/NHibernateBuilder.cs                                                                   
+// *	Created @ 03/09/2012 7:16 PM							       
+// *	By Hermanxwong@Codeplex					         
+// *								         
+// *	This Project follow BSD License					        
+// ************************************************************************************************
+
+using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Xml;
-using xCoder.Bean;
 
-namespace xCoder.Logic.Builder
+namespace xCoder.DB2Project.Builder
 {
-    public class NHibernateBuilder : AbsBuilder
+    public class HBMBuilder : AbsBuilder
     {
-        public NHibernateBuilder(BuilderParameters parameters)
+        public HBMBuilder(BuilderParameters parameters)
             : base(parameters)
         {
-
         }
+
         /// <summary>
-        /// 
         /// </summary>
-        /// <returns>Built Files</returns>
+        /// <returns> Built Files </returns>
         public override string[] Build()
         {
             return HBMFileGenerate();
         }
-
         protected string[] HBMFileGenerate()
         {
             var tmp = new List<string>();
@@ -68,7 +74,8 @@ namespace xCoder.Logic.Builder
                     if (col.Nullable)
                     {
                         var propertyNotNullAttribute = xml.CreateAttribute("not-null");
-                        propertyNotNullAttribute.Value = (!col.Nullable).ToString(CultureInfo.InvariantCulture).ToLower();
+                        propertyNotNullAttribute.Value =
+                            (!col.Nullable).ToString(CultureInfo.InvariantCulture).ToLower();
                         property.Attributes.Append(propertyNotNullAttribute);
                     }
                     classNode.AppendChild(property);
@@ -96,21 +103,19 @@ namespace xCoder.Logic.Builder
                         manyToOneNode.Attributes.Append(manyToOneUniqueAttribute);
 
                         var manyToOneClassAttribute = xml.CreateAttribute("class");
-                        manyToOneClassAttribute.Value = string.Format("{0}.{1},{0}", Parameters.Namespace, foreignKey.ForeignTable);
+                        manyToOneClassAttribute.Value = string.Format("{0}.{1},{0}", Parameters.Namespace,
+                                                                      foreignKey.ForeignTable);
                         manyToOneNode.Attributes.Append(manyToOneClassAttribute);
                         classNode.AppendChild(manyToOneNode);
                     }
-
                 }
 
                 root.AppendChild(classNode);
                 var fileName = string.Format("{0}{1}.hbm.xml", Directory.FullName, table.Name);
                 xml.Save(fileName);
                 tmp.Add(fileName);
-
             }
             return tmp.ToArray();
         }
-
     }
 }

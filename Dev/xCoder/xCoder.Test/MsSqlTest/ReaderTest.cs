@@ -1,16 +1,20 @@
-﻿using System;
+﻿// ************************************************************************************************
+// *								       
+// *	Copyright (c) 2012, xCoder Project Team All rights reserved.	       
+// *	@xCoder/xCoder.Test/ReaderTest.cs                                                                   
+// *	Created @ 02/27/2012 10:39 AM							       
+// *	By Hermanxwong@Codeplex					         
+// *								         
+// *	This Project follow BSD License					        
+// ************************************************************************************************
+
+using System;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Web.Script.Serialization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using xCoder.Bean;
-using xCoder.Logic;
-using System.Web;
-using xCoder.Logic.Builder;
-using xCoder.Parser;
-using xCoder.Parser.xCode;
+using xCoder.DB2Project.Builder;
+using xCoder.DB2Project.Comm.Util;
+using xCoder.DB2Project.Data;
+using xCoder.DB2Project.Data.Type;
 
 namespace xCoder.Test.MsSqlTest
 {
@@ -21,25 +25,25 @@ namespace xCoder.Test.MsSqlTest
         public void Read()
         {
             var builder = new DBBuilder(new DBConnection
-            {
-                Account = "gonnatour",
-                DBType = DataBaseType.MSSQL,
-                Name = "gonnatour",
-                Password = "passw0rd",
-                Server = "localhost"
-            });
-            var database = builder.Build();
+                                            {
+                                                Account = "gonnatour",
+                                                DBType = DataBaseType.MSSQL,
+                                                Name = "gonnatour",
+                                                Password = "passw0rd",
+                                                Server = "localhost"
+                                            });
+            DataBase database = builder.Build();
             Console.WriteLine(database.Tables.Count);
 
-            foreach (var table in database.Tables)
+            foreach (Table table in database.Tables)
             {
-                var json = JsonUtil.Convert(table);
+                string json = JsonUtil.Convert(table);
                 Console.WriteLine("TABLE : " + json);
-                foreach (var column in table.Columns)
+                foreach (Column column in table.Columns)
                 {
                     json = JsonUtil.Convert(column);
                     Console.WriteLine("     COLUMN : " + json);
-                    foreach (var foreignKey in column.ForeignKeys)
+                    foreach (ForeignKey foreignKey in column.ForeignKeys)
                     {
                         json = JsonUtil.Convert(foreignKey);
                         Console.WriteLine("         Foreign Key : " + json);
@@ -47,78 +51,32 @@ namespace xCoder.Test.MsSqlTest
                 }
             }
 
-            var nhBuilder = new NHibernateBuilder(new BuilderParameters { DataBase = database, Namespace = "test", OutputDirectory = new DirectoryInfo(@"D:\Personal\VS2010\xCoder\xCoder.Test\test\nh\") });
-            var files = nhBuilder.Build();
-            foreach (var file in files)
+            var nhBuilder =
+                new HBMBuilder(new BuilderParameters
+                                          {
+                                              DataBase = database,
+                                              Namespace = "test",
+                                              OutputDirectory =
+                                                  new DirectoryInfo(@"D:\Personal\VS2010\xCoder\xCoder.Test\test\nh\")
+                                          });
+            string[] files = nhBuilder.Build();
+            foreach (string file in files)
             {
                 Console.WriteLine(file);
             }
         }
 
         [TestMethod]
-        public void Vares()
+        public void TypeRefTest()
         {
-            //var temp = File.ReadAllText("./testdata/test2.tpl", Encoding.UTF8);
-            var builder = new DBBuilder(new DBConnection
-            {
-                Account = "gonnatour",
-                DBType = DataBaseType.MSSQL,
-                Name = "gonnatour",
-                Password = "passw0rd",
-                Server = "localhost"
-            });
-            var database = builder.Build();
-            var vars = database.Tables;
-            var options = new XCoderOptions();
-
-            foreach (var table in database.Tables)
-            {
-                options.VariableParameter = table;
-                options.StatementParameters = new object[] { database, table };
-                options.Namesapces.Add("xCoder.Bean");
-                options.References.Add("System.dll");
-                options.References.Add(@".\xCoder.Bean.dll");
-                options.SourceCode = new FileInfo("./testdata/test2.tpl");
-                var parser = new Parser.Parser(options);
-                var temp = parser.Parse(ParserType.XCODER);
-                Console.WriteLine(temp);
-            }
-
-            //var collection = new ValueCollection();
-            //collection.Add("Name", vars.Name);
-            //var template = new VariableTagParser(new StringReader(temp)).Build(collection);
-
-            //Console.WriteLine(template);
-            //var statement = new StatementParser(new StringReader(template));
-            //statement.Build();
-            //foreach (var result in statement.Results)
-            //{
-            //    Console.WriteLine(result);
-            //}
-
-        }
-
-        [TestMethod]
-        public void Runner()
-        {
-            //var runner = new StatementRunner("Output=\"<#=Name#>\";");
-            //runner.Namesapces.Add("xCoder.Bean");
-            //runner.Error += new StatementErrorHandler(runner_Error);
-            //runner.Output += new StatmentOutput(runner_Output);
-            //runner.References.Add("System.dll");
-            //runner.References.Add(@"D:\Personal\VS2010\xCoder\xCoder.Bean\bin\Debug\xCoder.Bean.dll");
-            //runner.Execute(new DataBase(), new Table());
-            //Console.WriteLine(runner.Result);
-        }
-
-        void runner_Output(string output)
-        {
-            Console.WriteLine(output);
-        }
-
-        void runner_Error(Exception ex, string statment)
-        {
-            Console.WriteLine(ex.Message);
+            var mappedType = TypeMap.GetTypeString("Binary", true);
+            Console.WriteLine(mappedType);
+            mappedType = TypeMap.GetTypeString("DateTime", true);
+            Console.WriteLine(mappedType);
+            mappedType = TypeMap.GetTypeString("Binary", false);
+            Console.WriteLine(mappedType);
+            mappedType = TypeMap.GetTypeString("DateTime", false);
+            Console.WriteLine(mappedType);
         }
     }
 }

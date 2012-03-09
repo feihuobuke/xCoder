@@ -1,23 +1,21 @@
 ﻿// ************************************************************************************************
 // *								       
 // *	Copyright (c) 2012, xCoder Project Team All rights reserved.	       
-// *	@xCoder/xCoder.DB2Project/ParserType.cs                                                                   
-// *	Created @ 03/09/2012 6:29 PM							       
+// *	@xCoder/xCoder.DB2Project/IReader.cs                                                                   
+// *	Created @ 03/09/2012 7:16 PM							       
 // *	By Hermanxwong@Codeplex					         
 // *								         
 // *	This Project follow BSD License					        
 // ************************************************************************************************
 
-namespace xCoder.DB2Project.Parser
+using System.Data;
+using xCoder.DB2Project.Data;
+
+namespace xCoder.DB2Project
 {
-    public enum ParserType
+    public interface IReader
     {
-        XCODER
+        IDbConnection Connection { get; }
+        DataBase Read();
     }
-}
-
-namespace xxx
-{
-
-
 }

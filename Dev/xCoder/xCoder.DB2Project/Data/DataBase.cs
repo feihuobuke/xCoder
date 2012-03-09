@@ -1,23 +1,20 @@
 ﻿// ************************************************************************************************
 // *								       
 // *	Copyright (c) 2012, xCoder Project Team All rights reserved.	       
-// *	@xCoder/xCoder.DB2Project/ParserType.cs                                                                   
-// *	Created @ 03/09/2012 6:29 PM							       
+// *	@xCoder/xCoder.DB2Project/DataBase.cs                                                                   
+// *	Created @ 03/09/2012 7:17 PM							       
 // *	By Hermanxwong@Codeplex					         
 // *								         
 // *	This Project follow BSD License					        
 // ************************************************************************************************
 
-namespace xCoder.DB2Project.Parser
+using System.Collections.Generic;
+
+namespace xCoder.DB2Project.Data
 {
-    public enum ParserType
+    public class DataBase
     {
-        XCODER
+        public DBConnection Connection { get; set; }
+        public List<Table> Tables { get; set; }
     }
-}
-
-namespace xxx
-{
-
-
 }

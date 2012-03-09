@@ -44,50 +44,55 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bean\Column.cs" />
-    <Compile Include="Bean\DataBase.cs" />
-    <Compile Include="Bean\DBConnection.cs" />
-    <Compile Include="Bean\ForeignKey.cs" />
-    <Compile Include="Bean\Table.cs" />
-    <Compile Include="Bean\Type\DBType.cs" />
-    <Compile Include="Bean\Type\TableType.cs" />
+    <Compile Include="Attributes\DBTypeAttribute.cs" />
+    <Compile Include="Data\Column.cs" />
+    <Compile Include="Data\DataBase.cs" />
+    <Compile Include="Data\DBConnection.cs" />
+    <Compile Include="Data\ForeignKey.cs" />
+    <Compile Include="Data\Table.cs" />
+    <Compile Include="Data\Type\TypeMap.cs" />
+    <Compile Include="Data\Type\DBType.cs" />
+    <Compile Include="Data\Type\TableType.cs" />
     <Compile Include="Comm\Util\JsonUtil.cs" />
-    <Compile Include="Logic\Builder\AbsBuilder.cs" />
-    <Compile Include="Logic\Builder\BuilderParameters.cs" />
-    <Compile Include="Logic\Builder\DAOClassBuilder.cs" />
-    <Compile Include="Logic\Builder\NHibernateBuilder.cs" />
-    <Compile Include="Logic\Data\AbsBase\AbsReader.cs" />
-    <Compile Include="Logic\Data\DBBuilder.cs" />
-    <Compile Include="Logic\Data\MsSql\MsSqlReader.cs" />
-    <Compile Include="Logic\Extension\DBExt.cs" />
-    <Compile Include="Logic\Interface\IReader.cs" />
-    <Compile Include="Logic\Template\Loader.cs" />
-    <Compile Include="Logic\Template\TempleteFile.cs" />
+    <Compile Include="Builder\AbsBuilder.cs" />
+    <Compile Include="Builder\BuilderParameters.cs" />
+    <Compile Include="Builder\ClassBuilder.cs" />
+    <Compile Include="Builder\HBMBuilder.cs" />
+    <Compile Include="Data\Reader\AbsReader.cs" />
+    <Compile Include="Data\DBBuilder.cs" />
+    <Compile Include="Data\Reader\MsSqlReader.cs" />
+    <Compile Include="Extension\DBExt.cs" />
+    <Compile Include="Interface\IReader.cs" />
+    <Compile Include="Template\Loader.cs" />
+    <Compile Include="Template\TempleteFile.cs" />
     <Compile Include="Parser\AbsParser.cs" />
     <Compile Include="Parser\Parser.cs" />
     <Compile Include="Parser\ParserType.cs" />
     <Compile Include="Parser\xCode\ParserOptions.cs" />
     <Compile Include="Parser\xCode\StatementParser.cs" />
     <Compile Include="Parser\xCode\StatementRunner.cs" />
-    <Compile Include="Parser\xCode\ValueCollection.cs" />
+    <Compile Include="Parser\xCode\ValueCollectionExt.cs" />
     <Compile Include="Parser\xCode\VariableTagParser.cs" />
     <Compile Include="Parser\xCode\XCoderOptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Logic\T4Util\" />
+    <Folder Include="Bean\" />
+    <Folder Include="Data\AbsBase\" />
+    <Folder Include="Logic\" />
+    <Folder Include="T4Util\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Logic\Resource\MSSQL\Columns.sql" />
+    <EmbeddedResource Include="Resource\MSSQL\Columns.sql" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Logic\Resource\MSSQL\ForeignKeys.sql" />
+    <EmbeddedResource Include="Resource\MSSQL\ForeignKeys.sql" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Logic\Resource\MSSQL\Tables.sql" />
+    <EmbeddedResource Include="Resource\MSSQL\Tables.sql" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Logic\Resource\MSSQL.Table.Column.sql" />
+    <EmbeddedResource Include="Resource\MSSQL.Table.Column.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

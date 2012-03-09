@@ -1,17 +1,27 @@
-﻿using System;
-using xCoder.Bean;
-using xCoder.Logic.Data.MsSql;
+﻿// ************************************************************************************************
+// *								       
+// *	Copyright (c) 2012, xCoder Project Team All rights reserved.	       
+// *	@xCoder/xCoder.DB2Project/DBBuilder.cs                                                                   
+// *	Created @ 03/09/2012 7:16 PM							       
+// *	By Hermanxwong@Codeplex					         
+// *								         
+// *	This Project follow BSD License					        
+// ************************************************************************************************
 
-namespace xCoder.Logic
+using System;
+using xCoder.DB2Project.Data.Reader;
+using xCoder.DB2Project.Data.Type;
+
+namespace xCoder.DB2Project.Data
 {
     public class DBBuilder
     {
-        public DBConnection Connection { get; private set; }
-
         public DBBuilder(DBConnection connection)
         {
             Connection = connection;
         }
+
+        public DBConnection Connection { get; private set; }
 
         public DataBase Build()
         {

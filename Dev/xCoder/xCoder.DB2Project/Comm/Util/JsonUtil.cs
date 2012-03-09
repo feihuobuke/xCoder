@@ -1,6 +1,16 @@
-﻿using System.Web.Script.Serialization;
+﻿// ************************************************************************************************
+// *								       
+// *	Copyright (c) 2012, xCoder Project Team All rights reserved.	       
+// *	@xCoder/xCoder.DB2Project/JsonUtil.cs                                                                   
+// *	Created @ 03/09/2012 6:29 PM							       
+// *	By Hermanxwong@Codeplex					         
+// *								         
+// *	This Project follow BSD License					        
+// ************************************************************************************************
 
-namespace xCoder
+using System.Web.Script.Serialization;
+
+namespace xCoder.DB2Project.Comm.Util
 {
     public static class JsonUtil
     {

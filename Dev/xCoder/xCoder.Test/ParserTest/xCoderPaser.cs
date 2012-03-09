@@ -1,8 +1,21 @@
-﻿using System.CodeDom.Compiler;
+﻿// ************************************************************************************************
+// *								       
+// *	Copyright (c) 2012, xCoder Project Team All rights reserved.	       
+// *	@xCoder/xCoder.Test/xCoderPaser.cs                                                                   
+// *	Created @ 03/05/2012 3:43 PM							       
+// *	By Hermanxwong@Codeplex					         
+// *								         
+// *	This Project follow BSD License					        
+// ************************************************************************************************
+
+using System;
 using System.IO;
-using Microsoft.CSharp;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using xCoder.Parser.xCode;
+using xCoder.DB2Project.Data;
+using xCoder.DB2Project.Data.Type;
+using xCoder.DB2Project.Parser;
+using xCoder.DB2Project.Parser.xCode;
 
 namespace xCoder.Test.ParserTest
 {
@@ -12,19 +25,30 @@ namespace xCoder.Test.ParserTest
         [TestMethod]
         public void ParserTest()
         {
-            //var parser = new xCodeParser();
-            //parser.Parse(new FileInfo(@"D:\Personal\VS2010\xCoder\xCoder.Test\MsSqlTest\ReaderTest.cs"));
-            var codeProvider = new CSharpCodeProvider{};
+            var builder = new DBBuilder(new DBConnection
+                                            {
+                                                Account = "gonnatour",
+                                                DBType = DataBaseType.MSSQL,
+                                                Name = "gonnatour",
+                                                Password = "passw0rd",
+                                                Server = "localhost"
+                                            });
+            DataBase database = builder.Build();
+            var options = new XCoderOptions();
 
-            var genor = codeProvider.CreateGenerator(@"C:\Users\CTI\Desktop\xxx.cs");
-            //var parser = codeProvider.CreateGenerator();
-            //var unit = parser.Parse(new StringReader("using System.IO;"));
-            //using (var writer = new StreamWriter(@"C:\Users\CTI\Desktop\xxx.cs", true))
-            //{
-            //    codeProvider.GenerateCodeFromCompileUnit(unit, writer, new CodeGeneratorOptions());
-            //    writer.Close();
-            //}
-
+            foreach (Table table in database.Tables)
+            {
+                options.VariableParameter = table;
+                table.Columns = table.Columns.OrderByDescending(t => t.PrimaryKey).ThenBy(t=>t.Name).ToList();
+                options.StatementParameters = new object[] {database, table};
+                options.Namesapces.Add("xCoder.DB2Project.Data");
+                options.References.Add("System.dll");
+                options.References.Add(@".\xCoder.DB2Project.dll");
+                options.SourceCode = new FileInfo("./testdata/test2.tpl");
+                var parser = new Parser(options);
+                string temp = parser.Parse(ParserType.XCODER);
+                Console.WriteLine(temp);
+            }
         }
     }
 }

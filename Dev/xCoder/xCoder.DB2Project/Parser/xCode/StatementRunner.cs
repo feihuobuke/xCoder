@@ -1,9 +1,20 @@
-﻿using System;
+﻿// ************************************************************************************************
+// *								       
+// *	Copyright (c) 2012, xCoder Project Team All rights reserved.	       
+// *	@xCoder/xCoder.DB2Project/StatementRunner.cs                                                                   
+// *	Created @ 03/09/2012 6:29 PM							       
+// *	By Hermanxwong@Codeplex					         
+// *								         
+// *	This Project follow BSD License					        
+// ************************************************************************************************
+
+using System;
 using System.CodeDom.Compiler;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 
-namespace xCoder.Parser.xCode
+namespace xCoder.DB2Project.Parser.xCode
 {
     internal class StatementRunner
     {
@@ -41,9 +52,11 @@ namespace xCoder.Parser.xCode
             {
                 foreach (CompilerError error in result.Errors)
                 {
-                    var message = string.Format("({0}) : {1} @({2},{3})", error.ErrorNumber, error.ErrorText, error.Line, error.Column);
+                    var message = string.Format("({0}) : {1} @({2},{3})", error.ErrorNumber, error.ErrorText, error.Line,
+                                                error.Column);
                     Console.WriteLine(message);
-                    var ex = new Exception(message); if (Error != null)
+                    var ex = new Exception(message);
+                    if (Error != null)
                     {
                         Error(ex, SourceCode);
                     }
@@ -79,21 +92,28 @@ namespace xCoder.Parser.xCode
 
         protected string GenerateMethod()
         {
-            string tmp = "public string " + Invoker + " (DataBase DataBase,Table Table){ string Output=string.Empty;";
+            string tmp = "public string " + Invoker + " (DataBase DataBase,Table Table){ string Output=string.Empty;\r\n";
             tmp += SourceCode;
-            tmp += "return Output;}";
+            tmp += "\r\nreturn Output;}\r\n";
             return tmp;
         }
 
         protected string GenerateType()
         {
-            string tmp = Options.Namesapces.Cast<string>().Aggregate("using System;",
-                                                                     (current, namesapce) =>
-                                                                     current + string.Format("using {0};", namesapce));
-            tmp += "public class " + EntryPoint + " {";
-            tmp += GenerateMethod();
-            tmp += "}";
-            return tmp;
+
+            var temp = new StringBuilder("using System;\r\n");
+            foreach (string namesapce in Options.Namesapces)
+            {
+                if (!string.IsNullOrEmpty(namesapce))
+                {
+                    temp.AppendLine(string.Format("using {0};", namesapce));
+                }
+
+            }
+            temp.AppendLine("public class " + EntryPoint + " {");
+            temp.AppendLine(GenerateMethod());
+            temp.AppendLine("}");
+            return temp.ToString();
         }
 
         protected CompilerResults Compile()
