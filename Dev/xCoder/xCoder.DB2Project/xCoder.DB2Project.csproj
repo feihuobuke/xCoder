@@ -77,9 +77,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Bean\" />
     <Folder Include="Data\AbsBase\" />
-    <Folder Include="Logic\" />
     <Folder Include="T4Util\" />
   </ItemGroup>
   <ItemGroup>
