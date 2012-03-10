@@ -63,8 +63,6 @@
     <Compile Include="Data\Reader\MsSqlReader.cs" />
     <Compile Include="Extension\DBExt.cs" />
     <Compile Include="Interface\IReader.cs" />
-    <Compile Include="Template\Loader.cs" />
-    <Compile Include="Template\TempleteFile.cs" />
     <Compile Include="Parser\AbsParser.cs" />
     <Compile Include="Parser\Parser.cs" />
     <Compile Include="Parser\ParserType.cs" />
@@ -81,15 +79,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resource\MSSQL\Columns.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resource\MSSQL\ForeignKeys.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resource\MSSQL\Tables.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resource\MSSQL.Table.Column.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
