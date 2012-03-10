@@ -45,6 +45,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\DBTypeAttribute.cs" />
+    <Compile Include="Builder\ConfigFileBuilder.cs" />
+    <Compile Include="Builder\FileBuilder.cs" />
+    <Compile Include="Builder\ProjectBuilder.cs" />
+    <Compile Include="Builder\SolutionBuilder.cs" />
     <Compile Include="Data\Column.cs" />
     <Compile Include="Data\DataBase.cs" />
     <Compile Include="Data\DBConnection.cs" />
