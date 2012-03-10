@@ -78,7 +78,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\AbsBase\" />
-    <Folder Include="T4Util\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resource\MSSQL\Columns.sql" />
