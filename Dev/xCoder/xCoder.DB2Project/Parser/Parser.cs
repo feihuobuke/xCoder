@@ -17,11 +17,11 @@ namespace xCoder.DB2Project.Parser
 {
     public class Parser
     {
-        public Parser(XCoderOptions options)
+        public Parser(ParserOption options)
         {
             Options = options;
         }
-        public XCoderOptions Options { get; protected set; }
+        public ParserOption Options { get; protected set; }
         public string Parse(ParserType type)
         {
             var tmp = string.Empty;
@@ -31,7 +31,7 @@ namespace xCoder.DB2Project.Parser
                     var statement = new StatementParser(Options);
                     var temp = statement.Build(Options.StatementParameters);
                     Options.Code = new StringBuilder(temp);
-                    var varies = new VariableTagParser(Options);
+                    var varies = new VariableParser(Options);
                     tmp = varies.Build(Options.VariableParameter);
                     break;
                 default:

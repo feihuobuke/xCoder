@@ -34,13 +34,13 @@ namespace xCoder.Test.ParserTest
                                                 Server = "localhost"
                                             });
             DataBase database = builder.Build();
-            var options = new XCoderOptions();
+            var options = new ParserOption();
 
             foreach (Table table in database.Tables)
             {
                 options.VariableParameter = table;
-                table.Columns = table.Columns.OrderByDescending(t => t.PrimaryKey).ThenBy(t=>t.Name).ToList();
-                options.StatementParameters = new object[] {database, table};
+                table.Columns = table.Columns.OrderByDescending(t => t.PrimaryKey).ThenBy(t => t.Name).ToList();
+                options.StatementParameters = new object[] { database, table };
                 options.Namesapces.Add("xCoder.DB2Project.Data");
                 options.References.Add("System.dll");
                 options.References.Add(@".\xCoder.DB2Project.dll");

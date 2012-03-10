@@ -68,12 +68,12 @@
     <Compile Include="Parser\AbsParser.cs" />
     <Compile Include="Parser\Parser.cs" />
     <Compile Include="Parser\ParserType.cs" />
-    <Compile Include="Parser\xCode\ParserOptions.cs" />
+    <Compile Include="Parser\xCode\ParserHandler.cs" />
     <Compile Include="Parser\xCode\StatementParser.cs" />
-    <Compile Include="Parser\xCode\StatementRunner.cs" />
-    <Compile Include="Parser\xCode\ValueCollectionExt.cs" />
-    <Compile Include="Parser\xCode\VariableTagParser.cs" />
-    <Compile Include="Parser\xCode\XCoderOptions.cs" />
+    <Compile Include="Parser\xCode\StatementExcavator.cs" />
+    <Compile Include="Extension\CollectionExt.cs" />
+    <Compile Include="Parser\xCode\VariableParser.cs" />
+    <Compile Include="Parser\xCode\ParserOption.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -26,7 +26,7 @@ namespace xCoder.DB2Project.Builder
 
         public override string[] Build()
         {
-            var options = new XCoderOptions();
+            var options = new ParserOption();
             var currentAssembly = GetType().Assembly;
             var name = new FileInfo(currentAssembly.Location).Name;
             var namespaces = currentAssembly.GetTypes().Select(t => t.Namespace).ToArray();
@@ -34,8 +34,7 @@ namespace xCoder.DB2Project.Builder
             options.References.Add("System.dll");
             options.References.Add(@".\" + name);
             options.SourceCode = Parameters.Template;
-            options.VariableCollection.Add("Namespace",
-                                           string.IsNullOrEmpty(Parameters.Namespace) ? "" : Parameters.Namespace);
+            options.VariableCollection.Add("Namespace",string.IsNullOrEmpty(Parameters.Namespace) ? "" : Parameters.Namespace);
             var tmp = new List<string>();
             foreach (Table table in Parameters.DataBase.Tables)
             {

@@ -5,9 +5,9 @@
          <%  
 		 foreach (Column col in Table.Columns)
 		 {
-			Output += string.Format(@"
-			public virtual {0} {1} ",col.NetTypeString,col.Name)+@"{get;set;}
-			";
+			$
+			public virtual #col.NetTypeString #col.Name {get;set;}
+			$
 		 }
 		 %>
     }

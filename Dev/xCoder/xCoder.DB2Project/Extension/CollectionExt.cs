@@ -10,10 +10,10 @@
 
 using System.Collections.Specialized;
 
-namespace xCoder.DB2Project.Parser.xCode
+namespace xCoder.DB2Project.Extension
 {
 
-    internal static class ValueCollectionExt
+    internal static class CollectionExt
     {
         public static NameValueCollection Convert(this object source)
         {

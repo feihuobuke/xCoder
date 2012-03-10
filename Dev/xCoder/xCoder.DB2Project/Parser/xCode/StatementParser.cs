@@ -10,9 +10,9 @@
 
 namespace xCoder.DB2Project.Parser.xCode
 {
-    internal class StatementParser : AbsParser
+    internal class StatementParser : ParserBase
     {
-        public StatementParser(XCoderOptions options)
+        public StatementParser(ParserOption options)
             : base(options, "<%(.[^%>]*[^%>])%>")
         {
         }
@@ -24,7 +24,7 @@ namespace xCoder.DB2Project.Parser.xCode
             foreach (var match in list)
             {
                 var statement = match.Groups[1].Value;
-                var runner = new StatementRunner(Options, statement);
+                var runner = new StatementExcavator(Options, statement);
                 runner.Execute(parameters);
                 var replacemenet = runner.Successed ? runner.Result : string.Empty;
                 temp = temp.Replace(match.Value, replacemenet);

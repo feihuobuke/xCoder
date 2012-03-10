@@ -8,22 +8,24 @@
 // *	This Project follow BSD License					        
 // ************************************************************************************************
 
+using System;
 using System.Collections.Specialized;
 using System.IO;
 using System.Text;
 
 namespace xCoder.DB2Project.Parser.xCode
 {
-    public class XCoderOptions
+    public class ParserOption
     {
-        public XCoderOptions()
+        public ParserOption()
         {
             Namesapces = new StringCollection();
             References = new StringCollection();
             Code = null;
             VariableCollection = new NameValueCollection();
+            InstanceId = Guid.NewGuid();
         }
-
+        public Guid InstanceId { get; private set; }
         public StringCollection Namesapces { get; set; }
         public StringCollection References { get; set; }
         public FileInfo SourceCode { get; set; }

@@ -16,7 +16,7 @@ using xCoder.DB2Project.Parser.xCode;
 
 namespace xCoder.DB2Project.Parser
 {
-    internal abstract class AbsParser
+    internal abstract class ParserBase
     {
         protected static readonly RegexOptions RegxOptions = RegexOptions.Singleline | RegexOptions.Multiline |
                                                              RegexOptions.IgnoreCase | RegexOptions.CultureInvariant;
@@ -24,7 +24,7 @@ namespace xCoder.DB2Project.Parser
         internal Regex BaseRegex;
         internal string TagRegx;
 
-        protected AbsParser(XCoderOptions options, string tagRegx)
+        protected ParserBase(ParserOption options, string tagRegx)
         {
             Options = options;
             TagRegx = tagRegx;
@@ -39,7 +39,7 @@ namespace xCoder.DB2Project.Parser
             Results = new List<string>();
         }
 
-        public XCoderOptions Options { get; set; }
+        public ParserOption Options { get; set; }
         protected string TemplateContent { get; set; }
 
         public List<string> Results { get; protected set; }

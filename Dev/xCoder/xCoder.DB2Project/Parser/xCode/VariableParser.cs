@@ -13,15 +13,16 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using xCoder.DB2Project.Extension;
 
 namespace xCoder.DB2Project.Parser.xCode
 {
-    internal class VariableTagParser : AbsParser
+    internal class VariableParser : ParserBase
     {
         private const string ItemRegxFormat = "(.*)(={0})(.*)";
 
-        public VariableTagParser(XCoderOptions options)
-            : base(options, "<#(.[^#>]*[^<#]{0})#>") //@"\<\#(.[^(<#)]*[^(#>)])\#\>")
+        public VariableParser(ParserOption options)
+            : base(options, "<#(.[^#>]*[^<#]{0})#>")
         {
         }
 
