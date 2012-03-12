@@ -5,12 +5,13 @@
 // *	Created @ 03/09/2012 7:16 PM							       
 // *	By Hermanxwong@Codeplex					         
 // *								         
-// *	This Project follow BSD License					        
+// *	This Project follows BSD License					        
 // ************************************************************************************************
 
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Data.SqlServerCe;
 using xCoder.DB2Project.Data;
 using xCoder.DB2Project.Data.Type;
 
@@ -39,6 +40,10 @@ namespace xCoder.DB2Project
                 case DataBaseType.ORICAL:
                     break;
                 case DataBaseType.SQLCE:
+                    var str = string.IsNullOrEmpty(connection.Password) ?
+                        string.Format("Data Source={0};Persist Security Info=False;", connection.Name) :
+                        string.Format("Data Source={0};Encrypt Database=True;Password={1};Persist Security Info=False;", connection.Name, connection.Password);
+                    tmp = new SqlCeConnection(str);
                     break;
                 case DataBaseType.ACCESS:
                     break;

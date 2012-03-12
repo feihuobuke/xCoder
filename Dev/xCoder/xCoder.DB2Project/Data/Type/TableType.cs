@@ -5,7 +5,7 @@
 // *	Created @ 03/09/2012 7:17 PM							       
 // *	By Hermanxwong@Codeplex					         
 // *								         
-// *	This Project follow BSD License					        
+// *	This Project follows BSD License					        
 // ************************************************************************************************
 
 using System.ComponentModel;

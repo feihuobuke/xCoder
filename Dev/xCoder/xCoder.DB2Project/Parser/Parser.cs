@@ -5,11 +5,10 @@
 // *	Created @ 03/09/2012 6:29 PM							       
 // *	By Hermanxwong@Codeplex					         
 // *								         
-// *	This Project follow BSD License					        
+// *	This Project follows BSD License					        
 // ************************************************************************************************
 
 using System;
-using System.IO;
 using System.Text;
 using xCoder.DB2Project.Parser.xCode;
 
@@ -21,7 +20,9 @@ namespace xCoder.DB2Project.Parser
         {
             Options = options;
         }
+
         public ParserOption Options { get; protected set; }
+
         public string Parse(ParserType type)
         {
             var tmp = string.Empty;

@@ -5,7 +5,7 @@
 // *	Created @ 03/09/2012 7:17 PM							       
 // *	By Hermanxwong@Codeplex					         
 // *								         
-// *	This Project follow BSD License					        
+// *	This Project follows BSD License					        
 // ************************************************************************************************
 
 using System.Collections.Generic;
@@ -24,12 +24,10 @@ namespace xCoder.DB2Project.Data
         public object DefaultValue { get; set; }
         public int MaxLength { get; set; }
         public List<ForeignKey> ForeignKeys { get; set; }
+
         public string NetTypeString
         {
-            get
-            {
-                return TypeMap.GetTypeString(DBType, Nullable);
-            }
+            get { return TypeMap.GetTypeString(DBType, Nullable); }
         }
     }
 }

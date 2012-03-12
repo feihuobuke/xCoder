@@ -5,7 +5,7 @@
 // *	Created @ 03/09/2012 6:29 PM							       
 // *	By Hermanxwong@Codeplex					         
 // *								         
-// *	This Project follow BSD License					        
+// *	This Project follows BSD License					        
 // ************************************************************************************************
 
 namespace xCoder.DB2Project.Parser
@@ -18,6 +18,4 @@ namespace xCoder.DB2Project.Parser
 
 namespace xxx
 {
-
-
 }

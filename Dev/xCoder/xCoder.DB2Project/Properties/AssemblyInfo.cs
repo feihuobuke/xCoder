@@ -5,7 +5,7 @@
 // *	Created @ 03/09/2012 6:28 PM							       
 // *	By Hermanxwong@Codeplex					         
 // *								         
-// *	This Project follow BSD License					        
+// *	This Project follows BSD License					        
 // ************************************************************************************************
 
 using System.Reflection;
@@ -16,12 +16,16 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 
 [assembly: AssemblyTitle("xCoder.DB2Project")]
-[assembly: AssemblyDescription("xCoder Project is a solution for Auto-Generating project files, C# Code files from an existing DataBase.")]
+[assembly:
+    AssemblyDescription(
+        "xCoder Project is a solution for Auto-Generating project files, C# Code files from an existing DataBase.")]
 #if DEBUG
 [assembly: AssemblyConfiguration("Debug")]
 #else
+
 [assembly: AssemblyConfiguration("Release")]
 #endif
+
 [assembly: AssemblyCompany("xCoder Project Team @ CodePlex")]
 [assembly: AssemblyProduct("xCoder.DB2Project")]
 [assembly: AssemblyCopyright("Copyright © xCoder Project Team 2012")]

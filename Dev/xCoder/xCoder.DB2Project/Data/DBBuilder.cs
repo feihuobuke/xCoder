@@ -5,7 +5,7 @@
 // *	Created @ 03/09/2012 7:16 PM							       
 // *	By Hermanxwong@Codeplex					         
 // *								         
-// *	This Project follow BSD License					        
+// *	This Project follows BSD License					        
 // ************************************************************************************************
 
 using System;
@@ -38,6 +38,7 @@ namespace xCoder.DB2Project.Data
                 case DataBaseType.ORICAL:
                     break;
                 case DataBaseType.SQLCE:
+                    tmp = new SqlCeReader(Connection).Read();
                     break;
                 case DataBaseType.ACCESS:
                     break;

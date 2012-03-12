@@ -37,6 +37,10 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.SqlServerCe, Version=3.5.1.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\SqlCe\System.Data.SqlServerCe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -53,6 +57,7 @@
     <Compile Include="Data\DataBase.cs" />
     <Compile Include="Data\DBConnection.cs" />
     <Compile Include="Data\ForeignKey.cs" />
+    <Compile Include="Data\Reader\SqlCeReader.cs" />
     <Compile Include="Data\Table.cs" />
     <Compile Include="Data\Type\TypeMap.cs" />
     <Compile Include="Data\Type\DBType.cs" />
@@ -80,6 +85,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resource\MSSQL\Columns.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resource\SQLCE\Columns.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

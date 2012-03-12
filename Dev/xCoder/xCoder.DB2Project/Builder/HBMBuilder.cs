@@ -1,11 +1,11 @@
 ﻿// ************************************************************************************************
 // *								       
 // *	Copyright (c) 2012, xCoder Project Team All rights reserved.	       
-// *	@xCoder/xCoder.DB2Project/NHibernateBuilder.cs                                                                   
+// *	@xCoder/xCoder.DB2Project/HBMBuilder.cs                                                                   
 // *	Created @ 03/09/2012 7:16 PM							       
 // *	By Hermanxwong@Codeplex					         
 // *								         
-// *	This Project follow BSD License					        
+// *	This Project follows BSD License					        
 // ************************************************************************************************
 
 using System.Collections.Generic;
@@ -29,6 +29,7 @@ namespace xCoder.DB2Project.Builder
         {
             return HBMFileGenerate();
         }
+
         protected string[] HBMFileGenerate()
         {
             var tmp = new List<string>();
@@ -39,12 +40,12 @@ namespace xCoder.DB2Project.Builder
                 xml.AppendChild(version);
                 var root = xml.CreateElement("hibernate-mapping", "urn:nhibernate-mapping-2.2");
                 xml.AppendChild(root);
-                var classNode = xml.CreateElement("class", null);
+                var classNode = xml.CreateElement("class");
                 var nameAttribute = xml.CreateAttribute("name");
-                nameAttribute.Value = string.Format("{0}.{1},{0}", Parameters.Namespace, table.Name);
+                nameAttribute.Value = string.Format(string.IsNullOrEmpty(Parameters.Namespace) ? "{1}" : "{0}.{1},{0}", Parameters.Namespace, table.Name);
                 classNode.Attributes.Append(nameAttribute);
                 var tableAttribute = xml.CreateAttribute("table");
-                tableAttribute.Value = string.Format("{0}.{1}", table.Owner, table.Name);
+                tableAttribute.Value = string.Format(string.IsNullOrEmpty(table.Owner) ? "{1}" : "{0}.{1}", table.Owner, table.Name);
                 classNode.Attributes.Append(tableAttribute);
                 foreach (var col in table.Columns.OrderBy(t => t.Index).ToList())
                 {

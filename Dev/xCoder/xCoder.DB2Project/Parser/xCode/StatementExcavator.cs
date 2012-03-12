@@ -1,17 +1,16 @@
 ﻿// ************************************************************************************************
 // *								       
 // *	Copyright (c) 2012, xCoder Project Team All rights reserved.	       
-// *	@xCoder/xCoder.DB2Project/StatementRunner.cs                                                                   
+// *	@xCoder/xCoder.DB2Project/StatementExcavator.cs                                                                   
 // *	Created @ 03/09/2012 6:29 PM							       
 // *	By Hermanxwong@Codeplex					         
 // *								         
-// *	This Project follow BSD License					        
+// *	This Project follows BSD License					        
 // ************************************************************************************************
 
 using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -23,6 +22,8 @@ namespace xCoder.DB2Project.Parser.xCode
     {
         public const string EntryPoint = "CodeMethods";
         protected const string Invoker = "CodeInvoker";
+        private const string ScopeRegx = @"\$(.[^($)]*[^(\$)])\$";
+        private const string OutputScopeRegx = @"#(.[^#]*[\ ,])";
         protected static Dictionary<Guid, CompilerResults> Cached;
 
         public StatementExcavator(ParserOption options, string sourceCode)
@@ -31,7 +32,6 @@ namespace xCoder.DB2Project.Parser.xCode
             SourceCode = sourceCode;
             if (Cached == null)
                 Cached = new Dictionary<Guid, CompilerResults>();
-
         }
 
         public ParserOption Options { get; protected set; }
@@ -41,13 +41,20 @@ namespace xCoder.DB2Project.Parser.xCode
 
         public string SourceCode { get; protected set; }
 
+        #region IDisposable Members
+
+        public void Dispose()
+        {
+        }
+
+        #endregion
+
         public event StatementErrorHandler Error;
         public event StatmentOutput Output;
 
         public void Execute(params object[] objects)
         {
             CompilerResults result = Compile();
-
 
             Successed = !result.Errors.HasErrors;
             if (Successed)
@@ -79,21 +86,20 @@ namespace xCoder.DB2Project.Parser.xCode
 
         protected string GenerateMethod()
         {
-            string tmp = "public string " + Invoker + " (DataBase DataBase,Table Table){ string Output=string.Empty;\r\n";
+            string tmp = "public string " + Invoker +
+                         " (DataBase DataBase,Table Table){ string Output=string.Empty;\r\n";
             tmp += ScParse();
             tmp += "\r\nreturn Output;}\r\n";
             return tmp;
         }
-
-        const string ScopeRegx = @"\$(.[^($)]*[^(\$)])\$";
-        const string OutputScopeRegx = @"#(.[^#]*[\ ,])";
 
         protected string ScParse()
         {
             var tmp = SourceCode;
 
             var regx = new Regex(ScopeRegx, RegexOptions.Singleline | RegexOptions.Multiline | RegexOptions.IgnoreCase);
-            var subRegx = new Regex(OutputScopeRegx, RegexOptions.Singleline | RegexOptions.Multiline | RegexOptions.IgnoreCase);
+            var subRegx = new Regex(OutputScopeRegx,
+                                    RegexOptions.Singleline | RegexOptions.Multiline | RegexOptions.IgnoreCase);
             var matches = regx.Matches(SourceCode);
             foreach (var match in matches.OfType<Match>())
             {
@@ -103,7 +109,8 @@ namespace xCoder.DB2Project.Parser.xCode
                     var subMatches = subRegx.Matches(itemTemp);
                     foreach (var subMatch in subMatches.OfType<Match>())
                     {
-                        itemTemp = itemTemp.Replace(subMatch.Value, string.Format("\"+{0}+@\" ", subMatch.Groups[1].Value));
+                        itemTemp = itemTemp.Replace(subMatch.Value,
+                                                    string.Format("\"+{0}+@\" ", subMatch.Groups[1].Value));
                     }
                 }
 
@@ -114,7 +121,6 @@ namespace xCoder.DB2Project.Parser.xCode
 
         protected string GenerateType()
         {
-
             var temp = new StringBuilder("using System;\r\n");
             foreach (string namesapce in Options.Namesapces)
             {
@@ -122,11 +128,11 @@ namespace xCoder.DB2Project.Parser.xCode
                 {
                     temp.AppendLine(string.Format("using {0};", namesapce));
                 }
-
             }
+            temp.AppendLine("namespace xCoder.DB2Project.Parser.xCode{");
             temp.AppendLine("public class " + EntryPoint + " {");
             temp.AppendLine(GenerateMethod());
-            temp.AppendLine("}");
+            temp.AppendLine("}}");
             return temp.ToString();
         }
 
@@ -180,12 +186,6 @@ namespace xCoder.DB2Project.Parser.xCode
 
         public void Release()
         {
-
-        }
-
-        public void Dispose()
-        {
-
         }
     }
 }

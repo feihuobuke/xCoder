@@ -1,11 +1,11 @@
 // ************************************************************************************************
 // *								       
 // *	Copyright (c) 2012, xCoder Project Team All rights reserved.	       
-// *	@xCoder/xCoder.DB2Project/XCoderOptions.cs                                                                   
+// *	@xCoder/xCoder.DB2Project/ParserOption.cs                                                                   
 // *	Created @ 03/09/2012 6:29 PM							       
 // *	By Hermanxwong@Codeplex					         
 // *								         
-// *	This Project follow BSD License					        
+// *	This Project follows BSD License					        
 // ************************************************************************************************
 
 using System;
@@ -25,6 +25,7 @@ namespace xCoder.DB2Project.Parser.xCode
             VariableCollection = new NameValueCollection();
             InstanceId = Guid.NewGuid();
         }
+
         public Guid InstanceId { get; private set; }
         public StringCollection Namesapces { get; set; }
         public StringCollection References { get; set; }

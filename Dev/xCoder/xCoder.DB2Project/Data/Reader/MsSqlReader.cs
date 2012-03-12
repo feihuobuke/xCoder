@@ -5,7 +5,7 @@
 // *	Created @ 03/09/2012 7:16 PM							       
 // *	By Hermanxwong@Codeplex					         
 // *								         
-// *	This Project follow BSD License					        
+// *	This Project follows BSD License					        
 // ************************************************************************************************
 
 using System;
@@ -124,7 +124,8 @@ namespace xCoder.DB2Project.Data.Reader
         {
             var tmp = string.Empty;
             using (
-                var cmdStream = GetType().Assembly.GetManifestResourceStream("xCoder.DB2Project.Resource.MSSQL.Columns.sql"))
+                var cmdStream =
+                    GetType().Assembly.GetManifestResourceStream("xCoder.DB2Project.Resource.MSSQL.Columns.sql"))
                 if (cmdStream != null)
                     using (var reader = new StreamReader(cmdStream))
                     {

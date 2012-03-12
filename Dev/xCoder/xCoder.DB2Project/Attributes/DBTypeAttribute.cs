@@ -5,21 +5,21 @@
 // *	Created @ 03/09/2012 7:36 PM							       
 // *	By Hermanxwong@Codeplex					         
 // *								         
-// *	This Project follow BSD License					        
+// *	This Project follows BSD License					        
 // ************************************************************************************************
 
 using System;
-using System.Data;
 
 namespace xCoder.DB2Project.Attributes
 {
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = true, Inherited = true)]
     public class DBTypeAttribute : Attribute
     {
-        public string DBType { get; set; }
         public DBTypeAttribute(string dbType)
         {
             DBType = dbType;
         }
+
+        public string DBType { get; set; }
     }
 }

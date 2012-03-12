@@ -1,11 +1,11 @@
 ﻿// ************************************************************************************************
 // *								       
 // *	Copyright (c) 2012, xCoder Project Team All rights reserved.	       
-// *	@xCoder/xCoder.DB2Project/ParserOptions.cs                                                                   
+// *	@xCoder/xCoder.DB2Project/ParserHandler.cs                                                                   
 // *	Created @ 03/09/2012 6:29 PM							       
 // *	By Hermanxwong@Codeplex					         
 // *								         
-// *	This Project follow BSD License					        
+// *	This Project follows BSD License					        
 // ************************************************************************************************
 
 using System;

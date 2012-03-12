@@ -5,7 +5,7 @@
 // *	Created @ 03/10/2012 6:41 PM							       
 // *	By Hermanxwong@Codeplex					         
 // *								         
-// *	This Project follow BSD License					        
+// *	This Project follows BSD License					        
 // ************************************************************************************************
 
 using System.Collections.Generic;
@@ -17,15 +17,15 @@ using xCoder.DB2Project.Parser.xCode;
 
 namespace xCoder.DB2Project.Builder
 {
-    public class FileBuilder: AbsBuilder
+    public class FileBuilder : AbsBuilder
     {
-        public string Extension { get; set; }
-
-        public FileBuilder(BuilderParameters parameters,string extension)
+        public FileBuilder(BuilderParameters parameters, string extension)
             : base(parameters)
         {
             Extension = extension;
         }
+
+        public string Extension { get; set; }
 
         public override string[] Build()
         {
@@ -37,12 +37,13 @@ namespace xCoder.DB2Project.Builder
             options.References.Add("System.dll");
             options.References.Add(@".\" + name);
             options.SourceCode = Parameters.Template;
-            options.VariableCollection.Add("Namespace",string.IsNullOrEmpty(Parameters.Namespace) ? "" : Parameters.Namespace);
+            options.VariableCollection.Add("Namespace",
+                                           string.IsNullOrEmpty(Parameters.Namespace) ? "" : Parameters.Namespace);
             var tmp = new List<string>();
             foreach (Table table in Parameters.DataBase.Tables)
             {
                 options.VariableParameter = table;
-                options.StatementParameters = new object[] { Parameters.DataBase, table };
+                options.StatementParameters = new object[] {Parameters.DataBase, table};
 
                 var parser = new Parser.Parser(options);
                 string temp = parser.Parse(ParserType.XCODER);
