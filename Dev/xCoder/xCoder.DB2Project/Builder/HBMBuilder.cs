@@ -9,15 +9,19 @@
 // ************************************************************************************************
 
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Globalization;
 using System.Linq;
 using System.Xml;
+using xCoder.DB2Project.Comm;
+using xCoder.DB2Project.Data;
+using xCoder.DB2Project.Extension;
 
 namespace xCoder.DB2Project.Builder
 {
     public class HBMBuilder : AbsBuilder
     {
-        public HBMBuilder(BuilderParameters parameters)
+        public HBMBuilder(BuilderOption parameters)
             : base(parameters)
         {
         }
@@ -42,7 +46,7 @@ namespace xCoder.DB2Project.Builder
                 xml.AppendChild(root);
                 var classNode = xml.CreateElement("class");
                 var nameAttribute = xml.CreateAttribute("name");
-                nameAttribute.Value = string.Format(string.IsNullOrEmpty(Parameters.Namespace) ? "{1}" : "{0}.{1},{0}", Parameters.Namespace, table.Name);
+                nameAttribute.Value = AssemblyTypeFormat(table);
                 classNode.Attributes.Append(nameAttribute);
                 var tableAttribute = xml.CreateAttribute("table");
                 tableAttribute.Value = string.Format(string.IsNullOrEmpty(table.Owner) ? "{1}" : "{0}.{1}", table.Owner, table.Name);
@@ -64,7 +68,7 @@ namespace xCoder.DB2Project.Builder
                         property = xml.CreateElement("property");
                     }
                     var propertyNameAttribute = xml.CreateAttribute("name");
-                    propertyNameAttribute.Value = col.Name;
+                    propertyNameAttribute.Value = col.FieldName ?? col.Name;
                     property.Attributes.Append(propertyNameAttribute);
 
 
@@ -81,34 +85,47 @@ namespace xCoder.DB2Project.Builder
                     }
                     classNode.AppendChild(property);
                 }
-                var manyToOnes = table.Columns.Where(t => t.ForeignKeys.Count > 0).ToList();
-                foreach (var manyToOne in manyToOnes)
+                var parents = table.Parents.Where(t => !string.IsNullOrEmpty(t.ColumnRelated) && !string.IsNullOrEmpty(t.TableRelated)).ToList();
+                foreach (var parent in parents)
                 {
-                    foreach (var foreignKey in manyToOne.ForeignKeys)
+                    var schema = new XmlNodeSchema
                     {
-                        var manyToOneNode = xml.CreateElement("many-to-one");
-                        var manyToOneNameAttribute = xml.CreateAttribute("name");
-                        manyToOneNameAttribute.Value = foreignKey.ForeignTable;
-                        manyToOneNode.Attributes.Append(manyToOneNameAttribute);
+                        Name = "many-to-one",
+                        Properties = new NameValueCollection { { "name", parent.ClassName ?? parent.TableRelated }, { "column", parent.Column }, { "cascade", "none" }, { "unique", "true" }, { "class", AssemblyTypeFormat(parent) }, }
+                    };
+                    classNode.Write(schema);
+                }
 
-                        var manyToOneColumnAttribute = xml.CreateAttribute("column");
-                        manyToOneColumnAttribute.Value = manyToOne.Name;
-                        manyToOneNode.Attributes.Append(manyToOneColumnAttribute);
+                var childs = table.Childs.Where(t => !string.IsNullOrEmpty(t.ColumnRelated) && !string.IsNullOrEmpty(t.TableRelated)).ToList();
+                foreach (var child in childs)
+                {
 
-                        var manyToOneCascadeAttribute = xml.CreateAttribute("cascade");
-                        manyToOneCascadeAttribute.Value = "none";
-                        manyToOneNode.Attributes.Append(manyToOneCascadeAttribute);
+                    var schema = new XmlNodeSchema
+                                     {
+                                         Name = "list",
+                                         Properties = new NameValueCollection
+                                         {
+                                             {"name",child.TableRelated+"List"},
+                                             {"table",child.TableRelated},
+                                             {"cascade","all-delete-orphan"},
+                                             {"lazy","true"},
+                                         }
+                                     };
+                    schema.ChildNodes = new List<XmlNodeSchema>
+                                          {
+                                              new XmlNodeSchema
+                                              {
+                                                  Name = "key",
+                                                  Properties = new NameValueCollection{{"column",child.ColumnRelated}}
+                                              },
+                                              new XmlNodeSchema
+                                              {
+                                                  Name = "one-to-many",
+                                                  Properties = new NameValueCollection{{"class", AssemblyTypeFormat(child)}}
+                                              }
 
-                        var manyToOneUniqueAttribute = xml.CreateAttribute("unique");
-                        manyToOneUniqueAttribute.Value = "true";
-                        manyToOneNode.Attributes.Append(manyToOneUniqueAttribute);
-
-                        var manyToOneClassAttribute = xml.CreateAttribute("class");
-                        manyToOneClassAttribute.Value = string.Format("{0}.{1},{0}", Parameters.Namespace,
-                                                                      foreignKey.ForeignTable);
-                        manyToOneNode.Attributes.Append(manyToOneClassAttribute);
-                        classNode.AppendChild(manyToOneNode);
-                    }
+                                          };
+                    classNode.Write(schema);
                 }
 
                 root.AppendChild(classNode);
@@ -117,6 +134,24 @@ namespace xCoder.DB2Project.Builder
                 tmp.Add(fileName);
             }
             return tmp.ToArray();
+        }
+
+        protected string AssemblyTypeFormat(Table table)
+        {
+            var assembly = Parameters.Assembly ?? Parameters.Namespace;
+            assembly = string.IsNullOrEmpty(assembly) ? string.Empty : (", " + assembly);
+            var @namespace = string.IsNullOrEmpty(Parameters.Namespace) ? string.Empty : (Parameters.Namespace + ".");
+            var name = string.IsNullOrEmpty(table.ClassName) ? table.Name : table.ClassName;
+            return string.Format("{0}{1}{2}", @namespace, name, assembly);
+        }
+
+        protected string AssemblyTypeFormat(TableRelation table)
+        {
+            var assembly = Parameters.Assembly ?? Parameters.Namespace;
+            assembly = string.IsNullOrEmpty(assembly) ? string.Empty : (", " + assembly);
+            var @namespace = string.IsNullOrEmpty(Parameters.Namespace) ? string.Empty : (Parameters.Namespace + ".");
+            var name = string.IsNullOrEmpty(table.ClassName) ? table.TableRelated : table.ClassName;
+            return string.Format("{0}{1}{2}", @namespace, name, assembly);
         }
     }
 }

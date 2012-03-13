@@ -1,19 +1,19 @@
 ﻿// ************************************************************************************************
 // *								       
 // *	Copyright (c) 2012, xCoder Project Team All rights reserved.	       
-// *	@xCoder/xCoder.DB2Project/SolutionBuilder.cs                                                                   
-// *	Created @ 03/10/2012 6:44 PM							       
+// *	@xCoder/xCoder.DB2Project/ForeignKey.cs                                                                   
+// *	Created @ 03/09/2012 7:17 PM							       
 // *	By Hermanxwong@Codeplex					         
 // *								         
 // *	This Project follows BSD License					        
 // ************************************************************************************************
-
-namespace xCoder.DB2Project.Builder
+using System;
+namespace xCoder.DB2Project.Data
 {
-    public class SolutionBuilder : FileBuilder
+    [Obsolete("", true)]
+    public class ConstantsKey
     {
-        public SolutionBuilder(BuilderOption parameters) : base(parameters, ".sln")
-        {
-        }
+        public string Table { get; set; }
+        public string Column { get; set; }
     }
 }

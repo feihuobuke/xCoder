@@ -12,7 +12,7 @@ namespace xCoder.DB2Project.Builder
 {
     public class ClassBuilder : FileBuilder
     {
-        public ClassBuilder(BuilderParameters parameters)
+        public ClassBuilder(BuilderOption parameters)
             : base(parameters, ".cs")
         {
         }

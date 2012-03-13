@@ -8,7 +8,6 @@
 // *	This Project follows BSD License					        
 // ************************************************************************************************
 
-using System.Collections.Generic;
 using xCoder.DB2Project.Data.Type;
 
 namespace xCoder.DB2Project.Data
@@ -23,9 +22,10 @@ namespace xCoder.DB2Project.Data
         public string DBType { get; set; }
         public object DefaultValue { get; set; }
         public int MaxLength { get; set; }
-        public List<ForeignKey> ForeignKeys { get; set; }
 
-        public string NetTypeString
+        public string FieldName { get; set; }
+
+        public string CSharpType
         {
             get { return TypeMap.GetTypeString(DBType, Nullable); }
         }

@@ -33,7 +33,9 @@ namespace xCoder.DB2Project.Data.Type
 
         [DBType("Image")] public const string Image = "byte[]";
 
-        [DBType("Int")] public const string Int = "int";
+        [DBType("Int")]
+        [DBType("numeric")]
+        public const string Int = "int";
 
         [DBType("Money")] public const string Money = "float";
 

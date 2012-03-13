@@ -15,7 +15,7 @@ namespace xCoder.DB2Project.Builder
 {
     public abstract class AbsBuilder
     {
-        protected AbsBuilder(BuilderParameters parameters)
+        protected AbsBuilder(BuilderOption parameters)
         {
             DataBase = parameters.DataBase;
             Directory = parameters.OutputDirectory;
@@ -28,7 +28,7 @@ namespace xCoder.DB2Project.Builder
 
         public DataBase DataBase { get; protected set; }
         public DirectoryInfo Directory { get; protected set; }
-        public BuilderParameters Parameters { get; set; }
+        public BuilderOption Parameters { get; set; }
 
         /// <summary>
         ///   Build To File

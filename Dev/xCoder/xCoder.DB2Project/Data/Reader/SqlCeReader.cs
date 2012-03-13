@@ -34,7 +34,14 @@ namespace xCoder.DB2Project.Data.Reader
                 Command.CommandText = GetCmd();
                 try
                 {
-                    Command.Connection.Open();
+                    if (Command.Connection != null)
+                    {
+                        Command.Connection.Open();
+                    }
+                    else
+                    {
+                        throw new Exception("Connection can not be null.");
+                    }
                     using (var reader = Command.ExecuteReader())
                     {
                         try
@@ -46,14 +53,9 @@ namespace xCoder.DB2Project.Data.Reader
                                 {
                                     continue;
                                 }
-                                var table =
-                                    tmp.FirstOrDefault(
-                                        t => t.Name.Equals(tableName, StringComparison.CurrentCultureIgnoreCase)) ??
-                                    new Table { Name = tableName, Columns = new List<Column>() };
-                                if (table.Columns == null)
-                                {
-                                    table.Columns = new List<Column>();
-                                }
+                                var table = tmp.FirstOrDefault(t => t.Name.Equals(tableName, StringComparison.CurrentCultureIgnoreCase))
+                                    ??
+                                    new Table { Name = tableName };
                                 var col = new Column();
                                 col.Name = reader["COLUMN_NAME"] as string;
                                 col.DBType = reader["DATA_TYPE"] as string;
@@ -62,22 +64,16 @@ namespace xCoder.DB2Project.Data.Reader
                                 col.Index = int.Parse(index);
                                 var length = (reader["MAXIMUM_LENGTH"] as string) ?? "-1";
                                 col.MaxLength = int.Parse(length);
-                                col.Nullable = ((reader["IS_NULLABLE"] as string) ?? string.Empty).Equals("YES",StringComparison.OrdinalIgnoreCase);
+                                col.Nullable = ((reader["IS_NULLABLE"] as string) ?? string.Empty).Equals("YES", StringComparison.OrdinalIgnoreCase);
                                 //col.Owner = row["TABLE_SCHEMA"] as string;
-                                col.PrimaryKey = ((reader["PRIMARY_KEY"] as string) ?? string.Empty).Equals("YES",StringComparison.OrdinalIgnoreCase);
+                                col.PrimaryKey = ((reader["PRIMARY_KEY"] as string) ?? string.Empty).Equals("YES", StringComparison.OrdinalIgnoreCase);
                                 var foreignTable = reader["FOREIGN_TALBE"] as string;
                                 var foreignColumn = reader["FOREIGN_COLUMN"] as string;
-                                col.ForeignKeys = new List<ForeignKey>();
+                                //gen table parent -- foreign key
                                 if (!string.IsNullOrEmpty(foreignColumn) && !string.IsNullOrEmpty(foreignTable))
                                 {
-                                    col.ForeignKeys = new List<ForeignKey>
-                                                      {
-                                                          new ForeignKey
-                                                              {
-                                                                  ForeignColumn = foreignColumn,
-                                                                  ForeignTable = foreignTable
-                                                              }
-                                                      };
+                                    var parent = new TableRelation { Column = col.Name, ColumnRelated = foreignColumn, TableRelated = foreignTable };
+                                    table.Parents.Add(parent);
                                 }
                                 table.Columns.Add(col);
                                 if (!tmp.Any(t => t.Name.Equals(tableName, StringComparison.CurrentCultureIgnoreCase)))
@@ -93,7 +89,8 @@ namespace xCoder.DB2Project.Data.Reader
                         }
                         finally
                         {
-                            reader.Close();
+                            if (reader != null)
+                                reader.Close();
                         }
                     }
                 }

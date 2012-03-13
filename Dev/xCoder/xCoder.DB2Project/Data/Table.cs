@@ -15,9 +15,19 @@ namespace xCoder.DB2Project.Data
 {
     public class Table
     {
+        public Table()
+        {
+            Parents = new List<TableRelation>();
+            Childs = new List<TableRelation>();
+            Columns = new List<Column>();
+        }
         public string Owner { get; set; }
         public string Name { get; set; }
         public TableType Type { get; set; }
         public List<Column> Columns { get; set; }
+        public List<TableRelation> Parents { get; set; }
+        public List<TableRelation> Childs { get; set; }
+
+        public string ClassName { get; set; }
     }
 }

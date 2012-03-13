@@ -8,8 +8,11 @@
 // *	This Project follows BSD License					        
 // ************************************************************************************************
 
+using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
+using xCoder.DB2Project.Comm.Util;
 
 namespace xCoder.DB2Project.Data.Reader
 {
@@ -30,7 +33,33 @@ namespace xCoder.DB2Project.Data.Reader
 
         public virtual DataBase Read()
         {
-            return new DataBase {Connection = DBConn, Tables = GetTables()};
+            var tables = GetTables();
+            foreach (var table in tables)
+            {
+                var tblName = table.Name;
+                table.ClassName = StringUtil.ApplyCSharpNaming(tblName);
+                foreach (var column in table.Columns)
+                {
+                    column.FieldName = StringUtil.ApplyCSharpNaming(column.Name);
+                }
+                var childTables = tables.Where(t => t.Parents.Count > 0 &&
+                    t.Parents.Any(x => x.TableRelated.Equals(tblName, StringComparison.OrdinalIgnoreCase))).ToList();
+                foreach (var childTable in childTables)
+                {
+                    foreach (var child in childTable.Parents)
+                    {
+                        table.Childs.Add(new TableRelation
+                                              {
+                                                  Column = child.ColumnRelated,
+                                                  ColumnRelated = child.Column,
+                                                  TableRelated = childTable.Name,
+                                                  ClassName = StringUtil.ApplyCSharpNaming(childTable.Name)
+                                              });
+                    }
+                }
+            }
+
+            return new DataBase { Connection = DBConn, Tables = tables };
         }
 
         #endregion

@@ -12,7 +12,7 @@ namespace xCoder.DB2Project.Builder
 {
     public class ProjectBuilder : FileBuilder
     {
-        public ProjectBuilder(BuilderParameters parameters)
+        public ProjectBuilder(BuilderOption parameters)
             : base(parameters, ".csproj")
         {
         }

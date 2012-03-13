@@ -13,9 +13,10 @@ using xCoder.DB2Project.Data;
 
 namespace xCoder.DB2Project.Builder
 {
-    public class BuilderParameters
+    public class BuilderOption
     {
         public string Namespace { get; set; }
+        public string Assembly { get; set; }
         public DirectoryInfo OutputDirectory { get; set; }
         public DataBase DataBase { get; set; }
         public FileInfo Template { get; set; }

@@ -78,17 +78,11 @@ namespace xCoder.DB2Project.Data.Reader
                                                                                                                      OrdinalIgnoreCase);
                                         var foreignTable = row["FOREIGN_TALBE"] as string;
                                         var foreignColumn = row["FOREIGN_COLUMN"] as string;
-                                        col.ForeignKeys = new List<ForeignKey>();
+                                        //gen table parent -- foreign key
                                         if (!string.IsNullOrEmpty(foreignColumn) && !string.IsNullOrEmpty(foreignTable))
                                         {
-                                            col.ForeignKeys = new List<ForeignKey>
-                                                                  {
-                                                                      new ForeignKey
-                                                                          {
-                                                                              ForeignColumn = foreignColumn,
-                                                                              ForeignTable = foreignTable
-                                                                          }
-                                                                  };
+                                            var parent = new TableRelation { Column = col.Name, ColumnRelated = foreignColumn, TableRelated = foreignTable };
+                                            tbl.Parents.Add(parent);
                                         }
                                         tbl.Columns.Add(col);
                                     }

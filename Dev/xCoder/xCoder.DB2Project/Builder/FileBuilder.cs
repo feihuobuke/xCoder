@@ -19,7 +19,7 @@ namespace xCoder.DB2Project.Builder
 {
     public class FileBuilder : AbsBuilder
     {
-        public FileBuilder(BuilderParameters parameters, string extension)
+        public FileBuilder(BuilderOption parameters, string extension)
             : base(parameters)
         {
             Extension = extension;
