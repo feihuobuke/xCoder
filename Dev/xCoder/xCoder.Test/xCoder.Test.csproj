@@ -46,9 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Builder\NHDaoBuilderTest.cs" />
-    <Compile Include="MsSqlTest\ReaderTest.cs" />
-    <Compile Include="ParserTest\xCoderPaser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="testdata\test2.tpl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -70,6 +67,11 @@
       <Project>{91F61E76-F90F-4299-ABFC-CF04303F6515}</Project>
       <Name>xCoder.DB2Project</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Builder\" />
+    <Folder Include="MsSqlTest\" />
+    <Folder Include="ParserTest\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
