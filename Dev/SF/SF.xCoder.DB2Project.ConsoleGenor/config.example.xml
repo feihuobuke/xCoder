@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<config>
+  <DBConnection>
+    <Name>WDS</Name>
+    <Server>localhost</Server>
+    <Account>developer</Account>
+    <Password>passw0rd</Password>
+    <WindowsAuthorization>false</WindowsAuthorization>
+    <DBType>MSSQL</DBType>
+  </DBConnection>
+  <BuilderOption>
+    <Namespace></Namespace>
+    <Assembly></Assembly>
+    <OutputDirectory></OutputDirectory>
+    <Template></Template>
+    <FileNameFormat></FileNameFormat>
+    <FileDependency></FileDependency>
+    <Override></Override>
+  </BuilderOption>
+</config>

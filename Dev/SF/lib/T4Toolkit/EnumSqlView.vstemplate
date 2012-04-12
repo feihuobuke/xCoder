@@ -1,0 +1,20 @@
+﻿<!--
+<copyright file="EnumSqlView.vstemplate" company="T4 Toolbox Team">
+  Copyright © T4 Toolbox Team. All Rights Reserved.
+</copyright>
+-->
+<VSTemplate Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Item">
+  <TemplateData>
+    <DefaultName>Enum.cs</DefaultName>
+    <Name>Enumeration with a SQL view</Name>
+    <Description>A C# enumeration and a generated SQL view for accessing its values in T-SQL code</Description>
+    <ProjectType>CSharp</ProjectType>
+    <SortOrder>10</SortOrder>
+    <Icon>TextTemplate.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <References />
+    <ProjectItem SubType="" TargetFileName="$fileinputname$.cs" ReplaceParameters="true">Enum.cs</ProjectItem>
+    <ProjectItem SubType="" TargetFileName="$fileinputname$View.tt" ReplaceParameters="true">EnumView.tt</ProjectItem>
+  </TemplateContent>
+</VSTemplate>

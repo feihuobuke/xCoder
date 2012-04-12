@@ -1,0 +1,10 @@
+<#@ template language="C#" hostspecific="True" debug="True" #>
+<#@ output extension="txt" #>
+<#@ include file="T4Toolbox.tt" #>
+<#
+// <copyright file="$fileinputname$.tt" company="$registeredorganization$">
+//  Copyright © $registeredorganization$. All Rights Reserved.
+// </copyright>
+
+
+#>

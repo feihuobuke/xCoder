@@ -1,0 +1,39 @@
+<#@ template language="C#" hostspecific="True" debug="True" #>
+<#@ output extension="log" #>
+<#@ include file="T4Toolbox.tt" #>
+<#@ include file="T4Toolbox\UnitTesting.tt" #>
+<#@ import namespace="System.Diagnostics" #>
+<#+
+// <copyright file="$fileinputname$.tt" company="$registeredorganization$">
+//  Copyright © $registeredorganization$. All Rights Reserved.
+// </copyright>
+
+[TestClass]
+public class $fileinputname$
+{
+	[TestInitialize]
+	public void TestInitialize()
+	{
+
+	}
+
+	[TestCleanup]
+	public void TestCleanup()
+	{
+
+	}
+
+	[TestMethod]
+	public void Test_Success()
+	{
+		Assert.Inconclusive();
+	}
+
+    [TestMethod]
+    [ExpectedException(typeof(Exception))]
+    public void Test_Exception()
+    {
+		Assert.Inconclusive();
+    }
+}
+#>
